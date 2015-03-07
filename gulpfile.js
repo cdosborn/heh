@@ -4,7 +4,7 @@ var gulp = require('gulp'),
 var filesToMove = [
     './index.html',
     './scripts/**'
-    './css/**'
+    './assets/css/**'
 ];
 
 // move files
@@ -16,7 +16,7 @@ gulp.task("move", function(){
 gulp.task("watch", function(){
     gulp.watch('./index.html',['move']);
     gulp.watch('./scripts/**',['move']);
-    gulp.watch('./css/**',['move']);
+    gulp.watch('./assets/**',['move']);
 });
 
 gulp.task('default', ['move', 'watch']);
