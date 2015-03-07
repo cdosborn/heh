@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="assets/css/style.css">
 
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
     </head>
     <body>
 
@@ -20,11 +21,11 @@
                 repository:
                 <input name="repo" type="text" value=""/>
                 <button name= "subbut" type="button" class = "btn btn-default">Get My Timeline!</button>
-
+                <button type="button" class = "btn btn-default" id = "close">Close</button>
             </form>
         </div>
 
-        <div class = "timeline">
+        <div class = "timeline" style = {display:flex;}>
             <h1>An Array of iFrames! </h1>
         </div>
         <div class = "description">
@@ -45,6 +46,7 @@
     </body>
     <script src="scripts/basic.js"></script>
     <script src="scripts/temp.js"></script>
+    <script src ="assets/animate.js"/>
     <!--<script src="scripts/timeline.js"></script>-->
 
     <script> window.addEventListener('load', function() { App(); HI();}) </script>
