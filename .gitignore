@@ -10,3 +10,9 @@ node_modules/*
 logs/*
 deploy-develop.sh
 app.js
+
+*.xml
+
+.idea/.name
+
+.idea/heh.iml
