@@ -106,7 +106,7 @@ function handleLink(commit, elem) {
         App.correctPath(commit, url, function(path) { 
           var dirs = path.split('/');
           for (var i = 0; i < dirs.length; i++) {
-              if (dirs[i].contains('raw')) {
+              if (dirs[i].indexOf('raw') != -1) {
                   dirs[i] = 'cdn.rawgit.com';
                   break;
               };
@@ -126,7 +126,7 @@ function handleAnchor(commit, elem) {
     elem.onclick = function() {
         var dirs = url.split('/');
         
-        var url_is_relative = !dirs[0].contains('http');
+        var url_is_relative = dirs[0].indexOf('http') == -1;
         // if the path is relative update cur_dir
         if (url_is_relative) {
             for (var i = 0; i < dirs.length - 1; i++) {
