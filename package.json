@@ -1,0 +1,19 @@
+{
+  "name": "heh",
+  "version": "1.0.0",
+  "description": "Ability to jump back and forth between github pages commits",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cdosborn/heh.git"
+  },
+  "author": "Andre Mercer and Connor Osborn",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/cdosborn/heh/issues"
+  },
+  "homepage": "https://github.com/cdosborn/heh"
+}
