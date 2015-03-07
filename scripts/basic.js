@@ -90,7 +90,7 @@ function handleLink(commit, elem) {
 
     var dirs = url.split('/');
     
-    var url_is_relative = !dirs[0].contains('http');
+    var url_is_relative = dirs[0].indexOf('http') == -1;
     // if the path is relative update cur_dir
     var this_dur = cur_dir.slice();
     if (url_is_relative) {
