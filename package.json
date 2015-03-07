@@ -15,5 +15,14 @@
   "bugs": {
     "url": "https://github.com/cdosborn/heh/issues"
   },
-  "homepage": "https://github.com/cdosborn/heh"
+  "homepage": "https://github.com/cdosborn/heh",
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-concat": "^2.5.2",
+    "gulp-minify-css": "^0.5.1",
+    "gulp-plumber": "^0.6.6",
+    "gulp-rename": "^1.2.0",
+    "gulp-sourcemaps": "^1.5.0",
+    "gulp-util": "^3.0.4"
+  }
 }
