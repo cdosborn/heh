@@ -1,5 +1,6 @@
-var repository = 'Jam';
+//var repository = 'Jam';
 //var repository = 'hackarizona';
+var repository = 'lit';
 var owner = 'cdosborn';
 //var owner = 'respoke';
 var base = 'https://api.github.com/repos';
