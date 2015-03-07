@@ -33,4 +33,4 @@ var main = function(){
 };
 $('.timeline').hide()
 
-$(document).ready(main);
+$(document).ready(main());
