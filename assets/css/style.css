@@ -41,6 +41,9 @@ input{
 .btn{
     padding: 4px 12px;
 }
+#close{
+    display: none;
+}
 
 .mountains {
     z-index: -1;

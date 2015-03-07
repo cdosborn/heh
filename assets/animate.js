@@ -3,14 +3,16 @@ var isOpen = false;
 var main = function(){
 
 
-    $('.btn').click(function(){
+    $('#get').click(function(){
         // if sidebar is open, and clicked again
         if(isOpen){
+            $('#close').hide();
         }
         else {
             $('.timeline').show(500)
             //$('.timeline').css("display", "flex");
             isOpen = true
+            $('#close').show();
         }
     });
     $('#close').click(function(){
@@ -19,6 +21,7 @@ var main = function(){
             $('.timeline').hide("slow")
             //$('.timeline').css("display", "none");
             isOpen = false
+            $('#close').hide();
         }
         else {
 
@@ -28,5 +31,6 @@ var main = function(){
 
 
 };
+$('.timeline').hide()
 
 $(document).ready(main);
