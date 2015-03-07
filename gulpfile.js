@@ -12,4 +12,10 @@ gulp.task("move", function(){
     .pipe(gulp.dest("/var/www/heh"));
 });
 
-gulp.task('default', ['move']);
+gulp.task("watch", function(){
+    gulp.watch('./index.html',['move']);
+    gulp.watch('./scripts/**',['move']);
+});
+
+gulp.task('default', ['move', 'watch']);
+
