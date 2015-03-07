@@ -3,7 +3,7 @@ HI = function(){
 
 
 $(".btn").click(function(){
-		//console.log(getrepo)
+		console.log(getrepo)
 		testResults(getrepo);
 
 })
