@@ -7,3 +7,5 @@
 dist/*
 pres/*
 node_modules/*
+logs/*
+deploy-develop.sh

@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/cdosborn/heh",
   "devDependencies": {
+    "del": "^1.1.1",
+    "express": "^4.12.2",
+    "gith": "^1.0.4",
     "gulp": "^3.8.11",
     "gulp-concat": "^2.5.2",
     "gulp-minify-css": "^0.5.1",
