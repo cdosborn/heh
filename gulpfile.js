@@ -4,7 +4,7 @@ var gulp = require('gulp'),
 var filesToMove = [
     './index.html',
     './scripts/**',
-    './assets/css/**'
+    './assets/**'
 ];
 
 // move files
