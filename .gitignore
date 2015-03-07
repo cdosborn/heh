@@ -9,3 +9,4 @@ pres/*
 node_modules/*
 logs/*
 deploy-develop.sh
+app.js
