@@ -10,10 +10,40 @@ iframe {
     background-color: white;
 }
 input{
-    
+    height: 28px;
+}
+
+.forms{
+    padding: 10px;
+
+}
+.timeline{
+    display:flex;
+    position: relative;
+    background-color: aquamarine;
+    height: 200px;
+    /*bottom: 40px;*/
+}
+.description{
+    float:left;
+    width: 50%;
+    height: 250px;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.btn{
+    padding: 4px 12px;
 }
 
 .mountains {
+    z-index: -1;
     float: right;
     width: 50%;
     height: 250px;
