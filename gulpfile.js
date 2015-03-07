@@ -1,7 +1,6 @@
 var gulp = require('gulp'),
     rename = require("gulp-rename");
 
-
 var filesToMove = [
     './index.html',
     './scripts/**'
