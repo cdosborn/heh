@@ -6,11 +6,11 @@ var reqUrl = base + '/' + owner + '/' + repository + '/commits?sha=' + branch;
 
 var AllCommits = []
 
-var get = function(url, onload) { // gets list of commits
-    var r = new XMLHttpRequest();
-    r.onload = function(json){
-        AllCommits = json
-    }
-    r.open('GET', url)
-    r.send();
-}
+//var get = function(url, onload) { // gets list of commits
+//    var r = new XMLHttpRequest();
+//    r.onload = function(json){
+//        AllCommits = json
+//    }
+//    r.open('GET', url)
+//    r.send();
+//}

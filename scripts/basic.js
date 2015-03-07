@@ -81,10 +81,3 @@ App.correctPath = function(hash, path, cb) {
         cb(json.download_url);
     });
 };
-
-var get = function(url, onload) {
-    var r = new XMLHttpRequest();
-    r.onload = onload
-    r.open('GET', url)
-    r.send();
-}
