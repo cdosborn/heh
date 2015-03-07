@@ -16,10 +16,43 @@ var App = function() {
             var html = atob(content);
             var iframe = document.querySelector('iframe');
             iframe.srcdoc = html;
-            iframe.srcdoc = html.replace(/src="(.*?)"/g, function(match, path) {
-                App.correctPath(head.sha, path, function(url) {
+            iframe.addEventListener('load', function() {
+
+                iframe.removeEventListener('load', this);
+                var link = iframe.contentDocument.querySelector('a');
+                var href = link.attributes.href.value;
+                console.log('fuck', link.attributes.href.value);
+                link.setAttribute('href', 'javascript:;');
+                link.onclick = function() {
+                    link.removeEventListener('onclick', this);
+                    App.checkout(head.sha, href, function(content) { 
+                        var style;
+                        console.log("href2", href);
+                        //console.log("content", content);
+                      //var style = link.getAttribute('style');
+                      //if (style == null) {
+                      //    style = "pointer-events:none;";
+                      //} else {
+                      //    style += "pointer-events:none;";
+                      //}
+                      //link.setAttribute('style', style);
+                      //console.log('style', link.getAttribute('style'));
+
+                        console.log(atob(content));
+                        iframe.srcdoc = atob(content);
+                    });
+
+                }
+                App.correctPath(head.sha, link.attributes.href.value, function(url) { 
+                    console.log("href", link.attributes.href.value);
+                    console.log("url", url);
+                    //link.setAttribute('href', url);
                 });
             });
+
+          //var matches = /src="(.*?)"/g.exec(html);
+
+          //});
 
         });
     });
@@ -41,6 +74,7 @@ App.correctPath = function(hash, path, cb) {
     //GET /repos/:owner/:repo/contents/:path?ref=hash
 
     var reqUrl = base + '/' + owner + '/' + repository + '/contents/' + path + '?ref=' + hash
+    console.log("path", path);
     var file;
     get(reqUrl, function() {
         var json = JSON.parse(this.responseText);
