@@ -1,15 +1,13 @@
-var TIMES = 0;
-//var repository = 'Jam';
-//var repository = 'hackarizona';
-var repository = 'lit';
-var owner = 'cdosborn';
-//var owner = 'respoke';
+//var TIMES = 0;
+////var repository = 'Jam';
+////var repository = 'hackarizona';
+//var repository = 'lit';
+//var owner = 'cdosborn';
+////var owner = 'respoke';
 var base = 'https://api.github.com/repos';
-var branch = 'gh-pages'; // or 'master'
-var reqUrl = base + '/' + owner + '/' + repository + '/commits?sha=' + branch;
+//var branch = 'gh-pages'; // or 'master'
+//var reqUrl = base + '/' + owner + '/' + repository + '/commits?sha=' + branch;
 var cur_dir = [];
-
-var commits, head;
 
 var generateIframe = function() {
     var head = commit_list[commit_index];
@@ -31,7 +29,7 @@ var generateIframe = function() {
 App.checkout = function(hash, path, cb) {
     //GET /repos/:owner/:repo/contents/:path?ref=hash
 
-    var reqUrl = base + '/' + owner + '/' + repository + '/contents/' + path + '?ref=' + hash
+    var reqUrl = base + '/' + owner + '/' + repo + '/contents/' + path + '?ref=' + hash
     var file;
     get(reqUrl, function() {
         var json = JSON.parse(this.responseText);
@@ -43,8 +41,7 @@ App.checkout = function(hash, path, cb) {
 App.correctPath = function(hash, path, cb) {
     //GET /repos/:owner/:repo/contents/:path?ref=hash
 
-    var reqUrl = base + '/' + owner + '/' + repository + '/contents/' + path + '?ref=' + hash
-    console.log("path", path);
+    var reqUrl = base + '/' + owner + '/' + repo + '/contents/' + path + '?ref=' + hash
     var file;
     get(reqUrl, function() {
         var json = JSON.parse(this.responseText);
@@ -86,7 +83,6 @@ function handleSrc(commit, elem, after) {
           };
       };
 
-      //console.log("path", dirs.join('/'));
       elem.setAttribute('src', dirs.join('/'));
       after();
     });
@@ -119,11 +115,8 @@ function handleLink(commit, elem, after) {
               };
           };
 
-          console.log("LINK", dirs.join('/'));
-          console.log("CURDIR", cur_dir);
           elem.setAttribute('href', dirs.join('/'));
 	  after();
-	  console.log("WHAT", elem.getAttribute('href'));
         });
     }
 }
@@ -152,7 +145,6 @@ function handleAnchor(commit, elem, after) {
                 url += '/';
             }
             url += dirs[dirs.length - 1];
-            console.log('CURDIR', cur_dir.join('/'));
         }
 
 
