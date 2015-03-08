@@ -26,6 +26,7 @@ var onSubmit = function(owner, repo) {
                     window.repo = repo;
 			
 	            generateIframe();
+		    ANIMATE()
                 }
             })
         }
@@ -35,12 +36,14 @@ var onSubmit = function(owner, repo) {
 var onLeftArrow = function() {
   var current_commit_index = window.commit_index;
   window.commit_index = current_commit_index + 1;
+  ANIMATE();
   generateIframe();
 }
 
 var onRightArrow = function() {
   var current_commit_index = window.commit_index;
   window.commit_index = current_commit_index - 1;  
+  ANIMATE();
   generateIframe();
 }
 
