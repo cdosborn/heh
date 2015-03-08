@@ -11,7 +11,7 @@ var cur_dir = [];
 
 var generateIframe = function() {
     var head = commit_list[commit_index];
-    App.checkout(head.sha, 'index.html', function(content) {
+    checkout(head.sha, 'index.html', function(content) {
         // https://developer.github.com/v3/media/
         var html = atob(content);
         var iframe = document.querySelector('iframe');
@@ -26,7 +26,7 @@ var generateIframe = function() {
     });
 }
 
-App.checkout = function(hash, path, cb) {
+checkout = function(hash, path, cb) {
     //GET /repos/:owner/:repo/contents/:path?ref=hash
 
     var reqUrl = base + '/' + owner + '/' + repo + '/contents/' + path + '?ref=' + hash
@@ -38,7 +38,7 @@ App.checkout = function(hash, path, cb) {
     });
 };
 
-App.correctPath = function(hash, path, cb) {
+correctPath = function(hash, path, cb) {
     //GET /repos/:owner/:repo/contents/:path?ref=hash
 
     var reqUrl = base + '/' + owner + '/' + repo + '/contents/' + path + '?ref=' + hash
@@ -74,7 +74,7 @@ function updateChildrenLinks(commit, parent, after) {
 
 function handleSrc(commit, elem, after) {
     var url = elem.getAttribute('src');
-    App.correctPath(commit, url, function(path) { 
+    correctPath(commit, url, function(path) { 
       var dirs = path.split('/');
       for (var i = 0; i < dirs.length; i++) {
           if (dirs[i].indexOf('raw') != -1) {
@@ -106,7 +106,7 @@ function handleLink(commit, elem, after) {
         }
         url = this_dur.join('/') + '/' +  dirs[dirs.length - 1];
 
-        App.correctPath(commit, url, function(path) { 
+        correctPath(commit, url, function(path) { 
           var dirs = path.split('/');
           for (var i = 0; i < dirs.length; i++) {
               if (dirs[i].indexOf('raw') != -1) {
@@ -150,7 +150,7 @@ function handleAnchor(commit, elem, after) {
 
         elem.removeEventListener('onclick', this);
         if (url_is_relative) {
-            App.checkout(commit, url, function(content) { 
+            checkout(commit, url, function(content) { 
                 //console.log('src', cur_dir + url);
                 document.querySelector('iframe').srcdoc = atob(content);
 	    	after();

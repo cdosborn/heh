@@ -19,7 +19,7 @@ var onSubmit = function(owner, repo) {
                     window.commit_list = json;
                     window.commit_index = 0;
                     window.owner = owner;
-                    window.repo = repo;;
+                    window.repo = repo;
                 }
             })
         }
