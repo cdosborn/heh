@@ -9,3 +9,7 @@ var get = function(url, onload, headers) {
     r.open('GET', url)
     r.send();
 }
+
+//get('https:/google.com', function() {
+// JSON.parse(this.responseText());
+//})
