@@ -11,32 +11,22 @@ var cur_dir = [];
 
 var commits, head;
 
-var App = function() {
+var generateIframe = function() {
+    var head = commit_list[commit_index];
+    App.checkout(head.sha, 'index.html', function(content) {
+        // https://developer.github.com/v3/media/
+        var html = atob(content);
+        var iframe = document.querySelector('iframe');
+        iframe.srcdoc = html;
 
-    get(reqUrl, function() {
-        commits = JSON.parse(this.responseText);
-        head = commits[0]; 
-        App.checkout(head.sha, 'index.html', function(content) {
-            // https://developer.github.com/v3/media/
-            var html = atob(content);
-            var iframe = document.querySelector('iframe');
-            iframe.srcdoc = html;
-            var durp = function() { 
-                TIMES++; 
-
-                //iframe.removeEventListener('load', durp);
-                updateChildrenLinks(head.sha, iframe.contentDocument, function() {
-                    //var new_frame = document.createElement("iframe");
-                    //new_frame.setAttribute('srcdoc', iframe.contentDocument.documentElement.outerHTML); 
-                    //iframe.parentNode.replaceChild(new_frame, iframe);
-                });
-            };
-
-            iframe.addEventListener('load', durp);
-
-        });
+        var durp = function() { 
+		updateChildrenLinks(head.sha, iframe.contentDocument, function() {});
+        };
+    
+        iframe.addEventListener('load', durp);
+    
     });
-};
+}
 
 App.checkout = function(hash, path, cb) {
     //GET /repos/:owner/:repo/contents/:path?ref=hash

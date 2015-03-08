@@ -16,7 +16,6 @@ var onSubmit = function(owner, repo) {
 }
 
 var onLeftArrow = function() {
-
 }
 var onRightArrow = function() {}
 
