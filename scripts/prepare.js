@@ -22,24 +22,17 @@ var onSubmit = function(owner, repo) {
             })
         }
     });
-    console.log("Current_commit: ");
-    console.log(commit_list);
 }
 
 var onLeftArrow = function() {
   var current_commit_index = window.commit_index;
-  console.log("Current_commit: ");
-  console.log(window.commit_list);
-
-  
+  window.commit_index = current_commit_index + 1;
+  generateIframe();
 }
 
 var onRightArrow = function() {
   var current_commit_index = window.commit_index;
-  if(current_commit_index == 0){
-    //Do nothing
-  }
-
-    
+  window.commit_index = current_commit_index - 1;  
+  generateIframe();
 }
 
