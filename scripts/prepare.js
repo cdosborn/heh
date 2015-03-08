@@ -7,8 +7,6 @@ var parseForms = function(){
 }
 
 
-
-
 var onSubmit = function(owner, repo) {
     // /users/:username
     get('https://api.github.com/users/' + owner, function() {
@@ -29,6 +27,14 @@ var onSubmit = function(owner, repo) {
 }
 
 var onLeftArrow = function() {
+  var current_commit_index = window.commit_index;
+  window.commit_index = current_commit_index + 1;
+  generateIframe();
 }
-var onRightArrow = function() {}
+
+var onRightArrow = function() {
+  var current_commit_index = window.commit_index;
+  window.commit_index = current_commit_index - 1;  
+  generateIframe();
+}
 
