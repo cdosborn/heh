@@ -20,6 +20,8 @@ var onSubmit = function(owner, repo) {
                     window.commit_index = 0;
                     window.owner = owner;
                     window.repo = repo;
+			
+	            generateIframe();
                 }
             })
         }
