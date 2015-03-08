@@ -3,32 +3,16 @@ var isOpen = false;
 var ANIMATE = function(){
 
 
-    $('#get').click(function(){
-        // if sidebar is open, and clicked again
-        if(isOpen){
-            $('#close').hide();
-        }
-        else {
-            $('.timeline').show(500)
-            //$('.timeline').css("display", "flex");
-            isOpen = true
-            $('#close').show();
-        }
-    });
-    $('#close').click(function(){
-        // if sidebar is open, and clicked again
-        if(isOpen){
-            $('.timeline').hide("slow")
-            //$('.timeline').css("display", "none");
-            isOpen = false
-            $('#close').hide();
-        }
-        else {
-
-
-        }
-    });
-
-
-};
-$('.timeline').hide()
+    if (commit_index == commit_list.length()-1){
+        $('.left').hide();
+    }
+    else{
+        $('.left').show();
+    }
+    if (commit_index == 0){
+        $('.right').hide();
+    }
+    if (commit_index == 0){
+        $('.right').show();
+    }
+}
