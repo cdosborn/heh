@@ -3,10 +3,12 @@ body {
     /*height: 100em;*/
     margin : auto;
     background-color: #FAEEC9;
+    background-image: url(../images/triangular.png);
+    background-repeat: repeat;
 }
 iframe {
     width: 100%;
-    height: 800px;
+    height: 923px;
     background-color: white;
 }
 input{
