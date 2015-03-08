@@ -8,7 +8,7 @@ var onSubmit = function(owner, repo) {
                     window.commit_list = json;
                     window.commit_index = 0;
                     window.owner = owner;
-                    window.repo = repo;;
+                    window.repo = repo;
                 }
             })
         }
@@ -16,7 +16,19 @@ var onSubmit = function(owner, repo) {
 }
 
 var onLeftArrow = function() {
+  var current_commit_index = window.commit_index;
+  console.log("Current_commit: ");
+  console.log(window.commit_list);
 
+  
 }
-var onRightArrow = function() {}
+
+var onRightArrow = function() {
+  var current_commit_index = window.commit_index;
+  if(current_commit_index == 0){
+    //Do nothing
+  }
+
+    
+}
 
