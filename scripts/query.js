@@ -1,10 +1,10 @@
-var repository = 'lit';
-var owner = 'cdosborn';
-var base = 'https://api.github.com/repos';
-var branch = 'gh-pages'; // or 'master'
-var reqUrl = base + '/' + owner + '/' + repository + '/commits?sha=' + branch;
+//var repository = 'lit';
+//var owner = 'cdosborn';
+//var base = 'https://api.github.com/repos';
+//var branch = 'gh-pages'; // or 'master'
+//var reqUrl = base + '/' + owner + '/' + repository + '/commits?sha=' + branch;
 
-var AllCommits = []
+//var AllCommits = []
 
 //var get = function(url, onload) { // gets list of commits
 //    var r = new XMLHttpRequest();
