@@ -1,3 +1,14 @@
+var parseForms = function(){
+    $("#get").click(function(){
+        var owner = getrepo.owner.value;
+        var repo = getrepo.repo.value;
+        onSubmit(owner, repo);
+    })
+}
+
+
+
+
 var onSubmit = function(owner, repo) {
     // /users/:username
     get('https://api.github.com/users/' + owner, function() {
