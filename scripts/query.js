@@ -14,3 +14,7 @@ var AllCommits = []
 //    r.open('GET', url)
 //    r.send();
 //}
+
+get(reqUrl, function() {
+ log(JSON.parse(this.responseText()));
+})
