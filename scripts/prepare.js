@@ -4,6 +4,12 @@ var parseForms = function(){
         var repo = getrepo.repo.value;
         onSubmit(owner, repo);
     })
+    $('.left').click(function(){
+	onLeftArrow();
+    });
+    $('.right').click(function(){
+	onRightArrow();
+    });
 }
 
 

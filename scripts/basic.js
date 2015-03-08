@@ -115,6 +115,7 @@ function handleLink(commit, elem, after) {
               };
           };
 
+	  console.log(dirs.join('/'));
           elem.setAttribute('href', dirs.join('/'));
 	  after();
         });
