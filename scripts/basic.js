@@ -1,47 +1,35 @@
-var TIMES = 0;
-//var repository = 'Jam';
-//var repository = 'hackarizona';
-var repository = 'lit';
-var owner = 'cdosborn';
-//var owner = 'respoke';
+//var TIMES = 0;
+////var repository = 'Jam';
+////var repository = 'hackarizona';
+//var repository = 'lit';
+//var owner = 'cdosborn';
+////var owner = 'respoke';
 var base = 'https://api.github.com/repos';
-var branch = 'gh-pages'; // or 'master'
-var reqUrl = base + '/' + owner + '/' + repository + '/commits?sha=' + branch;
+//var branch = 'gh-pages'; // or 'master'
+//var reqUrl = base + '/' + owner + '/' + repository + '/commits?sha=' + branch;
 var cur_dir = [];
 
-var commits, head;
+var generateIframe = function() {
+    var head = commit_list[commit_index];
+    checkout(head.sha, 'index.html', function(content) {
+        // https://developer.github.com/v3/media/
+        var html = atob(content);
+        var iframe = document.querySelector('iframe');
+        iframe.srcdoc = html;
 
-var App = function() {
-
-    get(reqUrl, function() {
-        commits = JSON.parse(this.responseText);
-        head = commits[0]; 
-        App.checkout(head.sha, 'index.html', function(content) {
-            // https://developer.github.com/v3/media/
-            var html = atob(content);
-            var iframe = document.querySelector('iframe');
-            iframe.srcdoc = html;
-            var durp = function() { 
-                TIMES++; 
-
-                //iframe.removeEventListener('load', durp);
-                updateChildrenLinks(head.sha, iframe.contentDocument, function() {
-                    //var new_frame = document.createElement("iframe");
-                    //new_frame.setAttribute('srcdoc', iframe.contentDocument.documentElement.outerHTML); 
-                    //iframe.parentNode.replaceChild(new_frame, iframe);
-                });
-            };
-
-            iframe.addEventListener('load', durp);
-
-        });
+        var durp = function() { 
+		updateChildrenLinks(head.sha, iframe.contentDocument, function() {});
+        };
+    
+        iframe.addEventListener('load', durp);
+    
     });
-};
+}
 
-App.checkout = function(hash, path, cb) {
+checkout = function(hash, path, cb) {
     //GET /repos/:owner/:repo/contents/:path?ref=hash
 
-    var reqUrl = base + '/' + owner + '/' + repository + '/contents/' + path + '?ref=' + hash
+    var reqUrl = base + '/' + owner + '/' + repo + '/contents/' + path + '?ref=' + hash
     var file;
     get(reqUrl, function() {
         var json = JSON.parse(this.responseText);
@@ -50,11 +38,10 @@ App.checkout = function(hash, path, cb) {
     });
 };
 
-App.correctPath = function(hash, path, cb) {
+correctPath = function(hash, path, cb) {
     //GET /repos/:owner/:repo/contents/:path?ref=hash
 
-    var reqUrl = base + '/' + owner + '/' + repository + '/contents/' + path + '?ref=' + hash
-    console.log("path", path);
+    var reqUrl = base + '/' + owner + '/' + repo + '/contents/' + path + '?ref=' + hash
     var file;
     get(reqUrl, function() {
         var json = JSON.parse(this.responseText);
@@ -87,7 +74,7 @@ function updateChildrenLinks(commit, parent, after) {
 
 function handleSrc(commit, elem, after) {
     var url = elem.getAttribute('src');
-    App.correctPath(commit, url, function(path) { 
+    correctPath(commit, url, function(path) { 
       var dirs = path.split('/');
       for (var i = 0; i < dirs.length; i++) {
           if (dirs[i].indexOf('raw') != -1) {
@@ -96,7 +83,6 @@ function handleSrc(commit, elem, after) {
           };
       };
 
-      //console.log("path", dirs.join('/'));
       elem.setAttribute('src', dirs.join('/'));
       after();
     });
@@ -120,7 +106,7 @@ function handleLink(commit, elem, after) {
         }
         url = this_dur.join('/') + '/' +  dirs[dirs.length - 1];
 
-        App.correctPath(commit, url, function(path) { 
+        correctPath(commit, url, function(path) { 
           var dirs = path.split('/');
           for (var i = 0; i < dirs.length; i++) {
               if (dirs[i].indexOf('raw') != -1) {
@@ -129,11 +115,8 @@ function handleLink(commit, elem, after) {
               };
           };
 
-          console.log("LINK", dirs.join('/'));
-          console.log("CURDIR", cur_dir);
           elem.setAttribute('href', dirs.join('/'));
 	  after();
-	  console.log("WHAT", elem.getAttribute('href'));
         });
     }
 }
@@ -162,13 +145,12 @@ function handleAnchor(commit, elem, after) {
                 url += '/';
             }
             url += dirs[dirs.length - 1];
-            console.log('CURDIR', cur_dir.join('/'));
         }
 
 
         elem.removeEventListener('onclick', this);
         if (url_is_relative) {
-            App.checkout(commit, url, function(content) { 
+            checkout(commit, url, function(content) { 
                 //console.log('src', cur_dir + url);
                 document.querySelector('iframe').srcdoc = atob(content);
 	    	after();

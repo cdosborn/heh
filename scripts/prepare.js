@@ -23,7 +23,7 @@ var onSubmit = function(owner, repo) {
         }
     });
     console.log("Current_commit: ");
-    console.log(window.commit_list);
+    console.log(commit_list);
 }
 
 var onLeftArrow = function() {
