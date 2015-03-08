@@ -1,18 +1,16 @@
-HI = function(){
+parseForms = function(){
 
 
 
-$(".btn").click(function(){
+$("#get").click(function(){
 		//console.log(getrepo)
-		testResults(getrepo);
+
+    var owner = getrepo.owner.value;
+    var repo = getrepo.repo.value;
+
+
 
 })
 
 
-}
-function testResults (form) {
-    var TestVar = form.owner.value;
-    var test = form.repo.value;
-
-    //alert ("You typed: " + TestVar + " and " + test);
 }
