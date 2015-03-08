@@ -24,13 +24,12 @@ var App = function() {
             var durp = function() { 
                 TIMES++; 
 
-                iframe.removeEventListener('load', durp);
+                //iframe.removeEventListener('load', durp);
                 updateChildrenLinks(head.sha, iframe.contentDocument, function() {
-                    var new_frame = document.createElement("iframe");
-                    new_frame.setAttribute('srcdoc', iframe.contentDocument.documentElement.outerHTML); 
-                    iframe.parentNode().replaceChild(new_frame, iframe);
+                    //var new_frame = document.createElement("iframe");
+                    //new_frame.setAttribute('srcdoc', iframe.contentDocument.documentElement.outerHTML); 
+                    //iframe.parentNode.replaceChild(new_frame, iframe);
                 });
-
             };
 
             iframe.addEventListener('load', durp);
@@ -74,21 +73,19 @@ function updateChildrenLinks(commit, parent, after) {
   for (var i = 0, n = elements.length; i < n; i++) {
     elem = elements[i]; 
     if (elem.getAttribute('src') !== null) {
-        handleSrc(commit, elem);
+        handleSrc(commit, elem, after);
     } else if (elem.tagName == "A") {
-        handleAnchor(commit, elem);
+        handleAnchor(commit, elem, after);
     } else if (elem.tagName == "LINK") {
-        handleLink(commit, elem);
+        handleLink(commit, elem, after);
     }
   }
-  after();
-
 }
 
 // get elems to change
 // 
 
-function handleSrc(commit, elem) {
+function handleSrc(commit, elem, after) {
     var url = elem.getAttribute('src');
     App.correctPath(commit, url, function(path) { 
       var dirs = path.split('/');
@@ -101,16 +98,17 @@ function handleSrc(commit, elem) {
 
       //console.log("path", dirs.join('/'));
       elem.setAttribute('src', dirs.join('/'));
+      after();
     });
 }
 
-function handleLink(commit, elem) {
+function handleLink(commit, elem, after) {
     var url = elem.getAttribute('href');
 
     var dirs = url.split('/');
     
     var url_is_relative = dirs[0].indexOf('http') == -1;
-    // if the path is relative update cur_dir
+
     var this_dur = cur_dir.slice();
     if (url_is_relative) {
         for (var i = 0; i < dirs.length - 1; i++) {
@@ -131,13 +129,16 @@ function handleLink(commit, elem) {
               };
           };
 
-          console.log("path", dirs.join('/'));
+          console.log("LINK", dirs.join('/'));
+          console.log("CURDIR", cur_dir);
           elem.setAttribute('href', dirs.join('/'));
+	  after();
+	  console.log("WHAT", elem.getAttribute('href'));
         });
     }
 }
 
-function handleAnchor(commit, elem) {
+function handleAnchor(commit, elem, after) {
     var url = elem.getAttribute('href');
 
     elem.setAttribute('href', 'javascript:;'); 
@@ -170,9 +171,12 @@ function handleAnchor(commit, elem) {
             App.checkout(commit, url, function(content) { 
                 //console.log('src', cur_dir + url);
                 document.querySelector('iframe').srcdoc = atob(content);
+	    	after();
             });
-        }
-    }
+        } else { 
+	  after(); 
+	}
+    } 
 }
 
 
