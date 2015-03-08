@@ -1,3 +1,4 @@
+var TIMES = 0;
 //var repository = 'Jam';
 //var repository = 'hackarizona';
 var repository = 'lit';
@@ -20,15 +21,19 @@ var App = function() {
             var html = atob(content);
             var iframe = document.querySelector('iframe');
             iframe.srcdoc = html;
-            iframe.addEventListener('load', function() {
-               console.log("WTFF"); 
+            var durp = function() { 
+                TIMES++; 
 
-                iframe.removeEventListener('load', this);
+                iframe.removeEventListener('load', durp);
                 updateChildrenLinks(head.sha, iframe.contentDocument, function() {
-                    //iframe.setAttribute('srcdoc', iframe.contentDocument.documentElement.textContent); 
+                    var new_frame = document.createElement("iframe");
+                    new_frame.setAttribute('srcdoc', iframe.contentDocument.documentElement.outerHTML); 
+                    iframe.parentNode().replaceChild(new_frame, iframe);
                 });
 
-            });
+            };
+
+            iframe.addEventListener('load', durp);
 
         });
     });
