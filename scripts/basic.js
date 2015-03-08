@@ -21,9 +21,12 @@ var App = function() {
             var iframe = document.querySelector('iframe');
             iframe.srcdoc = html;
             iframe.addEventListener('load', function() {
+               console.log("WTFF"); 
 
                 iframe.removeEventListener('load', this);
-                updateChildrenLinks(head.sha, iframe.contentDocument);
+                updateChildrenLinks(head.sha, iframe.contentDocument, function() {
+                    //iframe.setAttribute('srcdoc', iframe.contentDocument.documentElement.textContent); 
+                });
 
             });
 
@@ -60,7 +63,7 @@ App.correctPath = function(hash, path, cb) {
 // updatesChildren, sets onclick on href
 //      onlcick needs to be able to reset the process
 
-function updateChildrenLinks(commit, parent) {
+function updateChildrenLinks(commit, parent, after) {
   var elements = parent.getElementsByTagName('*');
   var elem;
   for (var i = 0, n = elements.length; i < n; i++) {
@@ -73,6 +76,8 @@ function updateChildrenLinks(commit, parent) {
         handleLink(commit, elem);
     }
   }
+  after();
+
 }
 
 // get elems to change
@@ -80,8 +85,17 @@ function updateChildrenLinks(commit, parent) {
 
 function handleSrc(commit, elem) {
     var url = elem.getAttribute('src');
-    App.correctPath(commit, url, function(hosted_path) { 
-        elem.setAttribute('src', hosted_path);
+    App.correctPath(commit, url, function(path) { 
+      var dirs = path.split('/');
+      for (var i = 0; i < dirs.length; i++) {
+          if (dirs[i].indexOf('raw') != -1) {
+              dirs[i] = 'cdn.rawgit.com';
+              break;
+          };
+      };
+
+      //console.log("path", dirs.join('/'));
+      elem.setAttribute('src', dirs.join('/'));
     });
 }
 
